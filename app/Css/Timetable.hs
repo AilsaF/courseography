@@ -136,6 +136,7 @@ timetableCSS = do
         ".timetable-half-cell-display" ? do
             display tableCell
         ".timetable-cell" ? do
+            "color" -: "white !important"
             borderPink borderBottom
             borderPink borderTop
             borderLeftStyle none

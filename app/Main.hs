@@ -20,6 +20,8 @@ import Server (runServer)
 import Database.Database (setupDatabase)
 import Svg.Parser (parsePrebuiltSvgs)
 import Css.Compiler (compileCSS)
+import System.Process
+import System.Exit
 
 -- | A map of command-line arguments to their corresponding IO actions.
 taskMap :: Map.Map String (IO ())
@@ -32,9 +34,14 @@ taskMap = Map.fromList [
 -- | Courseography entry point.
 main :: IO ()
 main = do
+    -- result <- system "convert"
+    -- case result of
+    --     ExitFailure 127 -> putStrLn $ "Convert is not available."
+    --     _ -> putStrLn "Ran successfully"
     args <- getArgs
     let taskName = if null args then "server" else head args
     fromMaybe putUsage (Map.lookup taskName taskMap)
+
 
 -- | Print usage message to user (when main gets an incorrect argument).
 putUsage :: IO ()
